@@ -76,30 +76,29 @@ $('.dots i').click(function(){
 // Nome repo: js-jq-carousel-autoplay
 
 //  le cose principali su cui ragionare sono il setInterval ogni 3 secondi, il clearInterval se viene premuto il tasto play (con conseguente cambio dell'iconcina) e se si preme sulle frecce... andiamo per ordine...
-var play_button = $('.autoplay i').eq(0);
-var pause_button = $('.autoplay i').eq(1);
+var play_button = $('.autoplay-playing i');
+var pause_button = $('.autoplay-pausing i');
 
-$('.autoplay').click(function() {
-    if (play_button.hasClass('show')) {
-        play_button.removeClass('show');
-        pause_button.addClass('show');
-        var clock = setInterval(function(){
-                            var imgCorrente = $('img.active');
-                            var imgSuccessiva = imgCorrente.next('img');
 
-                            var pallinoCorrente = $('i.active');
-                            var pallinoSuccessivo = pallinoCorrente.next('i');
+$('.autoplay-playing').click(function() {
+    $('.autoplay-playing').removeClass('show');
+    $('.autoplay-pausing').addClass('show');
+    var clock = setInterval(function(){
+        var imgCorrente = $('img.active');
+        var imgSuccessiva = imgCorrente.next('img');
 
-                            imgCorrente.removeClass('active');
-                            imgSuccessiva.addClass('active');
+        var pallinoCorrente = $('i.active');
+        var pallinoSuccessivo = pallinoCorrente.next('i');
 
-                            pallinoCorrente.removeClass('active');
-                            pallinoSuccessivo.addClass('active');
+        imgCorrente.removeClass('active');
+        imgSuccessiva.addClass('active');
 
-                            if (imgCorrente.hasClass('last')) {
-                                imgSuccessiva = $('img.first').addClass('active');
-                                pallinoSuccessivo = $('i.first').addClass('active');
-                            };
-                        }, 3000);
-    }
+        pallinoCorrente.removeClass('active');
+        pallinoSuccessivo.addClass('active');
+
+        if (imgCorrente.hasClass('last')) {
+            imgSuccessiva = $('img.first').addClass('active');
+            pallinoSuccessivo = $('i.first').addClass('active');
+        };
+    }, 3000);
 });

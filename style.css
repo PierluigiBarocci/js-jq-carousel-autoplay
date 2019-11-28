@@ -75,7 +75,7 @@
     left: 50%;
     transform: translateX(-50%);
 }
-.autoplay {
+.autoplay-pausing, .autoplay-playing {
     cursor: pointer;
     border-radius: 50%;
     background-color: #3b5998;
@@ -83,26 +83,26 @@
     height: 20px;
     opacity: 1;
     transition: 0.2s;
-    display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
     bottom: 1%;
     left: 15%;
     transform: translateX(-50%);
+    display: none;
 }
 .autoplay:hover {
     opacity: 0.7;
     box-shadow: 3px 6px 11px -4px rgba(0,0,0,0.75);
     transition: 0.2s;
 }
-.autoplay i {
+.autoplay-pausing i, .autoplay-playing i {
     font-size: 12px;
     color: white;
-    display: none;
+
 }
-.autoplay i.show {
-    display: block;
+.autoplay-pausing.show, .autoplay-playing.show {
+    display: flex;
 }
 .dots i {
     font-size: 12px;
@@ -138,11 +138,11 @@
     .dots i {
         font-size: 16px;
     }
-    .autoplay {
+    .autoplay-pausing, .autoplay-playing {
         width: 50px;
         height: 50px;
     }
-    .autoplay i {
+    .autoplay-pausing i, .autoplay-playing i {
         font-size: 18px;
     }
 };
