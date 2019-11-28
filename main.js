@@ -74,3 +74,32 @@ $('.dots i').click(function(){
 // l'esercitazione di oggi prevede di aggiungere l'autoplay allo slider che abbiamo visto ieri.
 // L'idea è che ogni 3 secondi le slide cambino da sole, passando in automatico a visualizzare la slide successiva.
 // Nome repo: js-jq-carousel-autoplay
+
+//  le cose principali su cui ragionare sono il setInterval ogni 3 secondi, il clearInterval se viene premuto il tasto play (con conseguente cambio dell'iconcina) e se si preme sulle frecce... andiamo per ordine...
+var play_button = $('.autoplay i').eq(0);
+var pause_button = $('.autoplay i').eq(1);
+
+$('.autoplay').click(function() {
+    if (play_button.hasClass('show')) {
+        play_button.removeClass('show');
+        pause_button.addClass('show');
+        var clock = setInterval(function(){
+                            var imgCorrente = $('img.active');
+                            var imgSuccessiva = imgCorrente.next('img');
+
+                            var pallinoCorrente = $('i.active');
+                            var pallinoSuccessivo = pallinoCorrente.next('i');
+
+                            imgCorrente.removeClass('active');
+                            imgSuccessiva.addClass('active');
+
+                            pallinoCorrente.removeClass('active');
+                            pallinoSuccessivo.addClass('active');
+
+                            if (imgCorrente.hasClass('last')) {
+                                imgSuccessiva = $('img.first').addClass('active');
+                                pallinoSuccessivo = $('i.first').addClass('active');
+                            };
+                        }, 3000);
+    }
+});
