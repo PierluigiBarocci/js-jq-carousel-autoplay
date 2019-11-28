@@ -3,6 +3,7 @@
 // Nome repo: js-jq-carousel
 
 $('.rounded.arrow.right').click(function(){
+    // se c'è un clock, allora vai a myReset, la funzione che pulisce tutto.
     if (clock) {
         myReset();
     };
@@ -85,24 +86,29 @@ $('.dots i').click(function(){
 // Nome repo: js-jq-carousel-autoplay
 
 //  le cose principali su cui ragionare sono il setInterval ogni 3 secondi, il clearInterval se viene premuto il tasto play (con conseguente cambio dell'iconcina) e se si preme sulle frecce... andiamo per ordine...
+
+// unica condizione per far partire lo slider da fermo
 var clock = false;
 if (clock == false) {
+    // quando preme sul div con tasto pausa ferma il clock e fa riapparire il tasto play
     $('.autoplay-pausing').click(function(){
         myReset();
     });
 };
 
 $('.autoplay-playing').click(function(){
+    // quando preme sul div con tasto play fa partire il setInterval e ricambia i simboli
     clock = setInterval(myTurn, 3000);
     $('.autoplay-playing').removeClass('show');
     $('.autoplay-pausing').addClass('show');
 });
-
+// funzione per "ripulire il tutto"
 function myReset() {
     clearInterval(clock);
     $('.autoplay-pausing').removeClass('show');
     $('.autoplay-playing').addClass('show');
 };
+// funzione da inserire nel setInterval
 function myTurn() {
     var imgCorrente = $('img.active');
     var imgSuccessiva = imgCorrente.next('img');
