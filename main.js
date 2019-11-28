@@ -4,7 +4,7 @@
 
 $('.rounded.arrow.right').click(function(){
     if (clock) {
-        clearInterval(clock);
+        myReset();
     };
     // creiamo due variabili per non ripetere sempre img corrente e la sua successiva
     var imgCorrente = $('img.active');
@@ -28,7 +28,7 @@ $('.rounded.arrow.right').click(function(){
 
 $('.rounded.arrow.left').click(function(){
     if (clock) {
-        clearInterval(clock);
+        myReset();
     };
     var imgCorrente = $('img.active');
     var imgPrecedente = imgCorrente.prev('img');
@@ -60,6 +60,9 @@ $('.dots i').click(function(){
     var indexPallino = pallinoScelto.index();
     var imgCorrente = $('img.active');
 
+    if (clock) {
+        myReset();
+    };
 
     // se il pallino che clicco NON è quello attivo
     if (!pallinoScelto.hasClass('active')) {
@@ -82,8 +85,24 @@ $('.dots i').click(function(){
 // Nome repo: js-jq-carousel-autoplay
 
 //  le cose principali su cui ragionare sono il setInterval ogni 3 secondi, il clearInterval se viene premuto il tasto play (con conseguente cambio dell'iconcina) e se si preme sulle frecce... andiamo per ordine...
+var clock = false;
+if (clock == false) {
+    $('.autoplay-pausing').click(function(){
+        myReset();
+    });
+};
 
+$('.autoplay-playing').click(function(){
+    clock = setInterval(myTurn, 3000);
+    $('.autoplay-playing').removeClass('show');
+    $('.autoplay-pausing').addClass('show');
+});
 
+function myReset() {
+    clearInterval(clock);
+    $('.autoplay-pausing').removeClass('show');
+    $('.autoplay-playing').addClass('show');
+};
 function myTurn() {
     var imgCorrente = $('img.active');
     var imgSuccessiva = imgCorrente.next('img');
@@ -102,9 +121,3 @@ function myTurn() {
     pallinoSuccessivo = $('i.first').addClass('active');
     };
 };
-
-var clock = setInterval(myTurn, 3000);
-
-$('.autoplay-playing').click(function(){
-    clearInterval(clock);
-});

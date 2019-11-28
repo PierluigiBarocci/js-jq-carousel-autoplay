@@ -91,11 +91,12 @@
     transform: translateX(-50%);
     display: none;
 }
-.autoplay:hover {
+.autoplay-pausing:hover, .autoplay-playing:hover, .dots i:hover  {
     opacity: 0.7;
     box-shadow: 3px 6px 11px -4px rgba(0,0,0,0.75);
     transition: 0.2s;
 }
+
 .autoplay-pausing i, .autoplay-playing i {
     font-size: 12px;
     color: white;
